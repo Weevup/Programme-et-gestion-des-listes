@@ -15,7 +15,7 @@ import {
   Transport,
 } from "./models.js";
 
-export type ImportPersonPayload = Omit<Person, "id"> & {
+export type ImportPersonPayload = Omit<Person, "id" | "eventId"> & {
   memberships?: string[];
 };
 
@@ -363,8 +363,8 @@ export class InMemoryStore {
         const id = nanoid();
         const newPerson: Person = {
           id,
-          eventId,
           ...personPayload,
+          eventId,
         };
         this.people.push(newPerson);
         diagnostics.created += 1;
